@@ -137,16 +137,16 @@ CREATE POLICY "Admins can update estimates" ON car_estimates
 ### 4. Storage Setup
 
 1. In your Supabase dashboard, go to Storage
-2. Create a new bucket called `car-photos`
+2. Create a new bucket called `car-media`
 3. Set the bucket to public
 4. Create a storage policy:
 
 ```sql
 CREATE POLICY "Public Access" ON storage.objects
-  FOR SELECT USING (bucket_id = 'car-photos');
+  FOR SELECT USING (bucket_id = 'car-media');
 
 CREATE POLICY "Authenticated users can upload" ON storage.objects
-  FOR INSERT WITH CHECK (bucket_id = 'car-photos' AND auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (bucket_id = 'car-media' AND auth.role() = 'authenticated');
 ```
 
 ### 5. Create Admin User

@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
-import { CarEstimate } from '@/lib/supabase'
+import { getCarEstimates, updateCarEstimate, logAdminActivity, getEstimateStats } from '@/lib/database'
+import type { CarEstimate } from '@/lib/supabase'
 import { Car, LogOut, Eye, CheckCircle, XCircle, Clock, DollarSign } from 'lucide-react'
 import toast from 'react-hot-toast'
 
@@ -16,6 +17,13 @@ export default function AdminPage() {
   const [showModal, setShowModal] = useState(false)
   const [adminNotes, setAdminNotes] = useState('')
   const [finalPrice, setFinalPrice] = useState('')
+  const [stats, setStats] = useState({
+    total: 0,
+    pending: 0,
+    inspected: 0,
+    approved: 0,
+    completed: 0
+  })
   const router = useRouter()
 
   const checkAuth = useCallback(async () => {
@@ -40,15 +48,15 @@ export default function AdminPage() {
   }, [router])
 
   const fetchEstimates = useCallback(async () => {
-    const { data, error } = await supabase
-      .from('car_estimates')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (error) {
+    try {
+      const data = await getCarEstimates()
+      setEstimates(data)
+      
+      // Also fetch stats
+      const statsData = await getEstimateStats()
+      setStats(statsData)
+    } catch (error) {
       toast.error('Failed to fetch estimates')
-    } else {
-      setEstimates(data || [])
     }
   }, [])
 
@@ -63,26 +71,35 @@ export default function AdminPage() {
   }
 
   const updateEstimateStatus = async (id: string, status: CarEstimate['status'], notes?: string, price?: number) => {
-    const updateData: any = { status }
-    
-    if (notes) updateData.admin_notes = notes
-    if (price) updateData.final_price = price
-    if (status === 'inspected') updateData.inspection_date = new Date().toISOString()
+    try {
+      const updateData: any = { status }
+      
+      if (notes) updateData.admin_notes = notes
+      if (price) updateData.final_price = price
+      if (status === 'inspected') updateData.inspection_date = new Date().toISOString()
 
-    const { error } = await supabase
-      .from('car_estimates')
-      .update(updateData)
-      .eq('id', id)
+      await updateCarEstimate(id, updateData)
 
-    if (error) {
-      toast.error('Failed to update estimate')
-    } else {
+      // Log admin activity
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        await logAdminActivity({
+          admin_id: user.id,
+          car_estimate_id: id,
+          action: 'status_update',
+          old_value: selectedEstimate?.status || 'unknown',
+          new_value: status
+        })
+      }
+
       toast.success('Estimate updated successfully')
       fetchEstimates()
       setShowModal(false)
       setSelectedEstimate(null)
       setAdminNotes('')
       setFinalPrice('')
+    } catch (error) {
+      toast.error('Failed to update estimate')
     }
   }
 
@@ -148,37 +165,29 @@ export default function AdminPage() {
           <p className="text-gray-600">Manage car estimate requests from customers</p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
-          <div className="card">
-            <div className="text-2xl font-bold text-gray-900">{estimates.length}</div>
-            <div className="text-sm text-gray-600">Total Requests</div>
-          </div>
-          <div className="card">
-            <div className="text-2xl font-bold text-yellow-600">
-              {estimates.filter(e => e.status === 'pending').length}
-            </div>
-            <div className="text-sm text-gray-600">Pending</div>
-          </div>
-          <div className="card">
-            <div className="text-2xl font-bold text-blue-600">
-              {estimates.filter(e => e.status === 'inspected').length}
-            </div>
-            <div className="text-sm text-gray-600">Inspected</div>
-          </div>
-          <div className="card">
-            <div className="text-2xl font-bold text-green-600">
-              {estimates.filter(e => e.status === 'approved').length}
-            </div>
-            <div className="text-sm text-gray-600">Approved</div>
-          </div>
-          <div className="card">
-            <div className="text-2xl font-bold text-gray-600">
-              {estimates.filter(e => e.status === 'completed').length}
-            </div>
-            <div className="text-sm text-gray-600">Completed</div>
-          </div>
-        </div>
+                 {/* Stats */}
+         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+           <div className="card">
+             <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
+             <div className="text-sm text-gray-600">Total Requests</div>
+           </div>
+           <div className="card">
+             <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
+             <div className="text-sm text-gray-600">Pending</div>
+           </div>
+           <div className="card">
+             <div className="text-2xl font-bold text-blue-600">{stats.inspected}</div>
+             <div className="text-sm text-gray-600">Inspected</div>
+           </div>
+           <div className="card">
+             <div className="text-2xl font-bold text-green-600">{stats.approved}</div>
+             <div className="text-sm text-gray-600">Approved</div>
+           </div>
+           <div className="card">
+             <div className="text-2xl font-bold text-gray-600">{stats.completed}</div>
+             <div className="text-sm text-gray-600">Completed</div>
+           </div>
+         </div>
 
         {/* Estimates List */}
         <div className="card">
