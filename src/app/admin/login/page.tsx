@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { Car, Eye, EyeOff } from 'lucide-react'
+import Image from 'next/image'
 import toast from 'react-hot-toast'
 
 export default function AdminLoginPage() {
@@ -49,11 +50,11 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#f6f6f6' }}>
       <div className="max-w-md w-full space-y-8">
         <div>
-          <div className="flex justify-center">
-            <Car className="h-12 w-12 text-primary-600" />
+          <div className="flex justify-center logo-crop" style={{height: 78}}>
+            <Image className="logo-img--tight" src="/227317006.png" alt="Green Cars" width={260} height={94} />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Admin Login
@@ -79,7 +80,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="input-field mt-1"
-                  placeholder="admin@carsell.com"
+                  placeholder="admin@greencars.com"
                 />
               </div>
               

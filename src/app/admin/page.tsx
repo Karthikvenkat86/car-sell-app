@@ -143,9 +143,9 @@ export default function AdminPage() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <Car className="h-8 w-8 text-primary-600" />
-              <h1 className="ml-2 text-2xl font-bold text-gray-900">CarSell Admin</h1>
+            <div className="flex items-center logo-crop" style={{height: 82}}>
+              <Image className="logo-img--tight" src="/227317006.png" alt="Green Cars" width={240} height={87} />
+              <h1 className="sr-only">Green Cars Admin</h1>
             </div>
             <button
               onClick={handleLogout}

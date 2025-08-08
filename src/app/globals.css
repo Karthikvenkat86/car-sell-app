@@ -24,4 +24,13 @@
   .card {
     @apply bg-white rounded-lg shadow-md p-6;
   }
+  
+  /* Visually crop top/bottom whitespace from raster logos */
+  .logo-crop {
+    @apply inline-flex items-center overflow-hidden;
+  }
+  .logo-img--tight {
+    margin-top: -16px;
+    margin-bottom: -12px;
+  }
 }

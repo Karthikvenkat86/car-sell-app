@@ -6,8 +6,8 @@ import { Toaster } from 'react-hot-toast'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CarSell - Sell Your Car Fast',
-  description: 'Get instant cash for your car. Upload photos, get an estimate, and receive immediate payment after inspection.',
+  title: 'Green Cars - Sell Your Car Fast',
+  description: 'Green Cars: Get instant cash for your car. Upload photos, get an estimate, and receive immediate payment after inspection.',
 }
 
 export default function RootLayout({

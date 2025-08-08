@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Green Cars">
+  <defs>
+    <linearGradient id="gc_grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Car silhouette body -->
+  <path d="M40 150c0-10 6-19 15-23l34-14c8-3 17-5 25-5h14c10 0 20 3 28 9l18 13c4 3 9 5 14 5h10c9 0 16 7 16 16v14c0 4-3 7-7 7H47c-4 0-7-3-7-7v-15z" fill="url(#gc_grad)"/>
+
+  <!-- Roof line -->
+  <path d="M72 128c8-12 22-20 36-20h32c10 0 20 4 28 10l14 10" fill="none" stroke="#34D399" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Wheels -->
+  <circle cx="84" cy="176" r="18" fill="#064E3B"/>
+  <circle cx="176" cy="176" r="18" fill="#064E3B"/>
+  <circle cx="84" cy="176" r="8" fill="#A7F3D0"/>
+  <circle cx="176" cy="176" r="8" fill="#A7F3D0"/>
+
+  <!-- Eco leaf on roof -->
+  <path d="M118 104c8-8 20-10 30-6-6 10-18 16-30 14v-8z" fill="#34D399"/>
+  <path d="M148 98c-6 2-12 6-18 12" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+</svg>
+
