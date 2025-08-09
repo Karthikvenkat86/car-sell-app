@@ -194,8 +194,8 @@ export default function HomePage() {
        <header className="bg-white shadow-lg">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="flex justify-between items-center py-4 sm:py-6">
-             <div className="flex items-center logo-crop" style={{ height: 64 }}>
-               <Image className="logo-img--tight" src="/green-cars-full.png" alt="Green Cars" width={200} height={72} />
+             <div className="flex items-center w-[60vw]">
+               <Image className="w-full h-auto" src="/green-carz-logo.svg" alt="green Carz" width={800} height={320} />
              </div>
              <div className="flex flex-col items-end">
                <div className="flex items-center space-x-2">
@@ -248,20 +248,23 @@ export default function HomePage() {
               </h2>
               
               {/* Handover Keys Tagline - Moved to top */}
-              <div className="inline-flex items-center bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-4 rounded-full shadow-lg mb-6">
+              <div className="inline-flex items-center bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-4 rounded-full shadow-lg mb-3">
                 <span className="text-2xl font-bold">🔑 We Pay First. Take Keys After Name Transfer. 100% Hassle-Free 🔑</span>
               </div>
+
               
-              <p className="text-xl text-gray-600 mb-6">
-                Hello Hyderabad! Struggling to sell your other-state car in Hyderabad for a good price?
-                Enquire with us once — once the deal is over, we transfer the name and then you hand over the keys.
+              <p className="text-xl text-gray-700 mb-6">
+                Hello Hyderabad! Struggling to sell your <span className="font-semibold text-emerald-700">other-state car</span> for a good price?
+                We especially handle <span className="font-semibold">Karnataka (Bengaluru)</span> and <span className="font-semibold">Tamil Nadu</span> registrations with a smooth, compliant process.
+                Enquire once — we transfer the name first, then you hand over the keys.
               </p>
 
             </div>
            
            {/* State Coverage Section */}
            <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
-             <h3 className="text-2xl font-bold text-gray-900 mb-6">Pan-India Car Buying Service</h3>
+             <h3 className="text-2xl font-bold text-gray-900 mb-2">Pan-India Car Buying Service</h3>
+             <div className="inline-block mb-6 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-full px-3 py-1">Other-State Cars Welcome (KA, TN, MH, KL)</div>
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                <div className="text-center group">
                  <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -722,9 +725,9 @@ export default function HomePage() {
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
              <div>
-                <div className="flex items-center mb-4 logo-crop" style={{height: 68}}>
-                  <Image className="logo-img--tight" src="/green-cars-full.png" alt="Green Cars" width={220} height={80} />
-                 <span className="sr-only">Green Cars</span>
+                 <div className="flex items-center mb-4">
+                  <Image className="h-12 md:h-18 w-auto" src="/green-carz-logo.svg" alt="green Carz" width={420} height={168} />
+                 <span className="sr-only">green Carz</span>
                </div>
                <p className="text-gray-400 mb-4">The most trusted car buying service in Hyderabad</p>
                <div className="flex space-x-4">
@@ -777,7 +780,7 @@ export default function HomePage() {
            </div>
            
            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-              <p>&copy; 2024 Green Cars. All rights reserved. | Serving Hyderabad & South India</p>
+               <p>&copy; 2024 green Carz. All rights reserved. | Serving Hyderabad & South India</p>
            </div>
          </div>
        </footer>

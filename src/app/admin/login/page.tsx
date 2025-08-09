@@ -54,7 +54,7 @@ export default function AdminLoginPage() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <div className="flex justify-center logo-crop" style={{height: 78}}>
-            <Image className="logo-img--tight" src="/227317006.png" alt="Green Cars" width={260} height={94} />
+            <Image className="logo-img--tight" src="/green-carz-logo.svg" alt="green Carz" width={260} height={94} />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Admin Login
