@@ -248,13 +248,13 @@ export default function HomePage() {
               </h2>
               
               {/* Handover Keys Tagline - Moved to top */}
-              <div className="inline-flex items-center bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-4 rounded-full shadow-lg mb-3">
+              <div className="inline-flex items-center bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-4 rounded-full shadow-lg mb-3">
                 <span className="text-2xl font-bold">🔑 We Pay First. Take Keys After Name Transfer. 100% Hassle-Free 🔑</span>
               </div>
 
               
               <p className="text-xl text-gray-700 mb-6">
-                Hello Hyderabad! Struggling to sell your <span className="font-semibold text-emerald-700">other-state car</span> for a good price?
+                Hello Hyderabad! Struggling to sell your <span className="font-semibold text-primary-700">other-state car</span> for a good price?
                 We especially handle <span className="font-semibold">Karnataka (Bengaluru)</span> and <span className="font-semibold">Tamil Nadu</span> registrations with a smooth, compliant process.
                 Enquire once — we transfer the name first, then you hand over the keys.
               </p>
@@ -264,68 +264,68 @@ export default function HomePage() {
            {/* State Coverage Section */}
            <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
              <h3 className="text-2xl font-bold text-gray-900 mb-2">Pan-India Car Buying Service</h3>
-             <div className="inline-block mb-6 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-full px-3 py-1">Other-State Cars Welcome (KA, TN, MH, KL)</div>
+             <div className="inline-block mb-6 text-sm font-semibold text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-3 py-1">Other-State Cars Welcome (KA, TN, MH, KL)</div>
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                <div className="text-center group">
-                 <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                    <span className="text-2xl">🏛️</span>
                  </div>
                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Karnataka</h4>
                  <p className="text-gray-600 text-sm">Bangalore, Mysore, Mangalore & more</p>
                  <div className="mt-3">
-                   <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Active</span>
+                  <span className="inline-block bg-primary-100 text-primary-800 text-xs px-3 py-1 rounded-full">Active</span>
                  </div>
                </div>
                
                <div className="text-center group">
-                 <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                    <span className="text-2xl">🏛️</span>
                  </div>
                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Tamil Nadu</h4>
                  <p className="text-gray-600 text-sm">Chennai, Coimbatore, Madurai & more</p>
                  <div className="mt-3">
-                   <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Active</span>
+                  <span className="inline-block bg-primary-100 text-primary-800 text-xs px-3 py-1 rounded-full">Active</span>
                  </div>
                </div>
                
                <div className="text-center group">
-                 <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                    <span className="text-2xl">🏛️</span>
                  </div>
                  <h4 className="text-lg font-semibold text-gray-900 mb-2">All States</h4>
                  <p className="text-gray-600 text-sm">Maharashtra, Kerala, AP & Telangana</p>
                  <div className="mt-3">
-                   <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Active</span>
+                  <span className="inline-block bg-primary-100 text-primary-800 text-xs px-3 py-1 rounded-full">Active</span>
                  </div>
                </div>
              </div>
              
-                           <div className="mt-8 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
+                 <div className="mt-8 p-4 bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl">
                 <p className="text-gray-700 font-medium">
                   💡 <strong>Why Choose Us?</strong> We provide doorstep inspection and instant payment across all major cities in South India!
                 </p>
               </div>
               
               {/* Secure Transfer Process */}
-              <div className="mt-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200">
-                <h4 className="text-lg font-bold text-green-800 mb-4">🔒 Secure Transfer Process</h4>
+              <div className="mt-6 p-6 bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl border border-primary-200">
+                <h4 className="text-lg font-bold text-primary-800 mb-4">🔒 Secure Transfer Process</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="group rounded-xl bg-white p-6 border border-emerald-100 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 text-white flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 text-white flex items-center justify-center mb-4">
                       <DollarSign className="h-5 w-5" />
                     </div>
                     <div className="font-semibold text-gray-900">Get Cash First</div>
                     <p className="text-sm text-gray-600 mt-1">Receive instant payment after inspection</p>
                   </div>
                   <div className="group rounded-xl bg-white p-6 border border-emerald-100 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 text-white flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 text-white flex items-center justify-center mb-4">
                       <ShieldCheck className="h-5 w-5" />
                     </div>
                     <div className="font-semibold text-gray-900">We Handle Transfer</div>
                     <p className="text-sm text-gray-600 mt-1">Complete ownership transfer to our company</p>
                   </div>
                   <div className="group rounded-xl bg-white p-6 border border-emerald-100 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 text-white flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 text-white flex items-center justify-center mb-4">
                       <Key className="h-5 w-5" />
                     </div>
                     <div className="font-semibold text-gray-900">Then Handover Keys</div>
@@ -340,7 +340,7 @@ export default function HomePage() {
        </section>
 
              {/* Benefits Section */}
-       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-50 to-green-50">
+       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-primary-50 to-primary-100">
          <div className="max-w-6xl mx-auto">
                        <div className="text-center mb-12">
               <h3 className="text-3xl font-bold text-gray-900 mb-4">Why Sell Your Car to Us?</h3>
@@ -349,7 +349,7 @@ export default function HomePage() {
            
                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
               <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center mb-4">
                   <span className="text-2xl">💰</span>
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">Best Price Guarantee</h4>
@@ -357,7 +357,7 @@ export default function HomePage() {
               </div>
               
               <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-600 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center mb-4">
                   <span className="text-2xl">🚚</span>
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">Free Pickup Service</h4>
@@ -365,7 +365,7 @@ export default function HomePage() {
               </div>
               
               <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-teal-400 to-emerald-600 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center mb-4">
                   <span className="text-2xl">⚡</span>
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">Instant Payment</h4>
@@ -373,7 +373,7 @@ export default function HomePage() {
               </div>
               
               <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center mb-4">
                   <span className="text-2xl">🏠</span>
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">Doorstep Service</h4>
@@ -389,18 +389,18 @@ export default function HomePage() {
               </div>
             </div>
            
-           <div className="bg-white rounded-2xl p-8 shadow-lg">
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                <div>
-                <div className="text-3xl font-bold text-emerald-600 mb-2">5000+</div>
+                 <div className="text-3xl font-bold text-primary-700 mb-2">5000+</div>
                  <div className="text-gray-600">Cars Bought</div>
                </div>
                <div>
-                 <div className="text-3xl font-bold text-green-600 mb-2">15+</div>
+                  <div className="text-3xl font-bold text-primary-700 mb-2">15+</div>
                  <div className="text-gray-600">Cities Covered</div>
                </div>
                <div>
-                <div className="text-3xl font-bold text-teal-600 mb-2">4.9★</div>
+                 <div className="text-3xl font-bold text-primary-700 mb-2">4.9★</div>
                  <div className="text-gray-600">Customer Rating</div>
                </div>
              </div>
@@ -686,7 +686,7 @@ export default function HomePage() {
             <p className="text-gray-600">4.9 out of 5 based on thousands of happy sellers</p>
           </div>
 
-          <div className="relative">
+            <div className="relative">
             <div className="relative h-auto min-h-[170px]">
               {testimonials.map((t, idx) => (
                 <div
@@ -695,7 +695,7 @@ export default function HomePage() {
                     currentTestimonial === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
                   }`}
                 >
-                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-6 shadow-sm">
+                  <div className="bg-primary-50 border border-primary-100 rounded-xl p-6 shadow-sm">
                     <div className="text-yellow-400 text-lg mb-2">★★★★★</div>
                     <p className="text-gray-800">{t.text}</p>
                     <div className="mt-4 text-sm font-semibold text-gray-900">{t.name}</div>
@@ -712,7 +712,7 @@ export default function HomePage() {
                   key={idx}
                   aria-label={`Go to testimonial ${idx + 1}`}
                   onClick={() => setCurrentTestimonial(idx)}
-                  className={`h-2.5 w-2.5 rounded-full ${currentTestimonial === idx ? 'bg-emerald-600' : 'bg-gray-300'}`}
+                  className={`h-2.5 w-2.5 rounded-full ${currentTestimonial === idx ? 'bg-primary-700' : 'bg-gray-300'}`}
                 />
               ))}
             </div>
