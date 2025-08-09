@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-import { Car, Camera, Phone, DollarSign, CheckCircle, Mail, MessageCircle, MapPin, ShieldCheck, Key } from 'lucide-react'
+import { Car, Camera, Phone, DollarSign, CheckCircle, MapPin, ShieldCheck, Key } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { supabase } from '@/lib/supabase'
 import { createCarEstimate, getCarMakes, getCarModelsByMakeName } from '@/lib/database'
@@ -30,6 +30,42 @@ export default function HomePage() {
   const [carMakes, setCarMakes] = useState<CarMake[]>([])
   const [carModels, setCarModels] = useState<CarModel[]>([])
   const [isLoadingModels, setIsLoadingModels] = useState(false)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+
+  const testimonials = [
+    {
+      name: 'Ravi K.',
+      location: 'Hyderabad',
+      text: 'Very professional and fast. Got the best price and instant payment. Highly recommended!'
+    },
+    {
+      name: 'Priya S.',
+      location: 'Secunderabad',
+      text: 'Seamless process from inspection to payment. Loved the transparency.'
+    },
+    {
+      name: 'Arun V.',
+      location: 'Gachibowli',
+      text: 'They paid first and took keys after transfer. Zero stress experience.'
+    },
+    {
+      name: 'Naveen R.',
+      location: 'Kukatpally',
+      text: 'Got a fair estimate and quick pickup. Team is super responsive on WhatsApp.'
+    },
+    {
+      name: 'Meera T.',
+      location: 'Madhapur',
+      text: 'Best service in the city. Truly hassle-free and trustworthy.'
+    }
+  ]
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTestimonial((idx) => (idx + 1) % testimonials.length)
+    }, 4000)
+    return () => clearInterval(intervalId)
+  }, [testimonials.length])
 
   const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<CarFormData>()
   const callbackRequested = watch('callback_requested')
@@ -154,39 +190,57 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#f6f6f6' }}>
-             {/* Header */}
+       {/* Header */}
        <header className="bg-white shadow-lg">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="flex justify-between items-center py-6">
-              <div className="flex items-center logo-crop" style={{height: 78}}>
-               <Image className="logo-img--tight" src="/green-cars-full.png" alt="Green Cars" width={260} height={94} />
-
+           <div className="flex justify-between items-center py-4 sm:py-6">
+             <div className="flex items-center logo-crop" style={{ height: 64 }}>
+               <Image className="logo-img--tight" src="/green-cars-full.png" alt="Green Cars" width={200} height={72} />
              </div>
-              <div className="flex flex-col items-end">
-                <div className="flex items-center space-x-3">
-                  <a href="tel:+916300856868" className="hidden sm:inline-flex items-center text-sm text-gray-700 hover:text-emerald-700">
-                    <Phone className="h-4 w-4 mr-1 text-emerald-600" /> +91 63008 56868
-                  </a>
-                  <a href="https://wa.me/916300856868" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-emerald-700 hover:text-emerald-800">
-                    <Image src="/whatsapp.svg" width={18} height={18} alt="WhatsApp" className="mr-1" /> WhatsApp
-                  </a>
-                </div>
-                <div className="flex items-center space-x-3 mt-1">
-                  <a href="mailto:info@greencars.com" className="inline-flex items-center text-sm text-gray-700 hover:text-emerald-700">
-                    <Mail className="h-4 w-4 mr-1 text-emerald-600" /> info@greencars.com
-                  </a>
-                  <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
-                    <MapPin className="h-3.5 w-3.5 mr-1" /> Hyderabad
-                  </span>
-                </div>
-              </div>
+             <div className="flex flex-col items-end">
+               <div className="flex items-center space-x-2">
+                 <a
+                   href="tel:+916300856868"
+                   className="inline-flex items-center text-sm sm:text-base text-gray-800 hover:text-emerald-700 font-medium whitespace-nowrap"
+                   aria-label="Call +91 63008 56868"
+                 >
+                   <Phone className="h-5 w-5 sm:h-4 sm:w-4 mr-1 text-emerald-600" />
+                   <span className="whitespace-nowrap">+91 63008 56868</span>
+                 </a>
+                 <a
+                   href="https://wa.me/916300856868"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="inline-flex items-center text-sm sm:text-base text-emerald-700 hover:text-emerald-800 font-medium whitespace-nowrap"
+                   aria-label="Chat on WhatsApp"
+                 >
+                   <Image src="/whatsapp.svg" width={18} height={18} alt="WhatsApp" className="mr-1" />
+                   <span className="hidden sm:inline">WhatsApp</span>
+                 </a>
+               </div>
+               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 gap-1 mt-2 sm:mt-1">
+                 <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold w-max">
+                   <MapPin className="h-4 w-4 mr-1" /> Hyderabad
+                 </span>
+               </div>
+             </div>
            </div>
+           {/* Site navigation (sitemap links) */}
+           <nav className="-mt-1 mb-2">
+             <div className="flex gap-4 overflow-x-auto no-scrollbar py-2 text-sm text-gray-700">
+               <a href="#home" className="hover:text-emerald-700 whitespace-nowrap">Home</a>
+               <a href="#enquire" className="hover:text-emerald-700 whitespace-nowrap">Enquire</a>
+               <a href="#estimate" className="hover:text-emerald-700 whitespace-nowrap">Estimate</a>
+               <a href="#testimonials" className="hover:text-emerald-700 whitespace-nowrap">Testimonials</a>
+               <a href="#contact" className="hover:text-emerald-700 whitespace-nowrap">Contact Us</a>
+             </div>
+           </nav>
          </div>
        </header>
 
 
-             {/* Hero Section */}
-       <section className="py-12 px-4 sm:px-6 lg:px-8">
+       {/* Hero Section */}
+       <section id="home" className="py-12 px-4 sm:px-6 lg:px-8">
          <div className="max-w-6xl mx-auto text-center">
                        <div className="mb-8">
               <h2 className="text-5xl font-bold text-gray-900 mb-6">
@@ -351,8 +405,26 @@ export default function HomePage() {
          </div>
        </section>
 
-       {/* Form Section */}
-       <section className="py-8 px-4 sm:px-6 lg:px-8">
+        {/* Enquire Section (CTA) */}
+        <section id="enquire" className="py-6 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow p-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div className="text-left">
+              <h4 className="text-xl font-bold text-gray-900">Have questions? Enquire now</h4>
+              <p className="text-gray-600 text-sm">Speak to our expert team for a quick answer.</p>
+            </div>
+            <div className="flex gap-3">
+              <a href="tel:+916300856868" className="btn-primary inline-flex items-center">
+                <Phone className="h-5 w-5 mr-2" /> Call Us
+              </a>
+              <a href="https://wa.me/916300856868" target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex items-center">
+                <Image src="/whatsapp.svg" width={18} height={18} alt="WhatsApp" className="mr-2" /> WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Form Section */}
+       <section id="estimate" className="py-8 px-4 sm:px-6 lg:px-8">
          <div className="max-w-2xl mx-auto">
            <div className="card">
              <h3 className="text-2xl font-bold text-gray-900 mb-6">Car Details</h3>
@@ -603,9 +675,50 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold text-gray-900">What Customers Say</h3>
+            <p className="text-gray-600">4.9 out of 5 based on thousands of happy sellers</p>
+          </div>
+
+          <div className="relative">
+            <div className="relative h-auto min-h-[170px]">
+              {testimonials.map((t, idx) => (
+                <div
+                  key={idx}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    currentTestimonial === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}
+                >
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-6 shadow-sm">
+                    <div className="text-yellow-400 text-lg mb-2">★★★★★</div>
+                    <p className="text-gray-800">{t.text}</p>
+                    <div className="mt-4 text-sm font-semibold text-gray-900">{t.name}</div>
+                    <div className="text-xs text-gray-600">{t.location}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Dots */}
+            <div className="mt-4 flex justify-center gap-2">
+              {testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  aria-label={`Go to testimonial ${idx + 1}`}
+                  onClick={() => setCurrentTestimonial(idx)}
+                  className={`h-2.5 w-2.5 rounded-full ${currentTestimonial === idx ? 'bg-emerald-600' : 'bg-gray-300'}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
        {/* Footer */}
-       <footer className="bg-gray-900 text-white">
+       <footer id="contact" className="bg-gray-900 text-white">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
              <div>
@@ -632,6 +745,17 @@ export default function HomePage() {
              </div>
              
              <div>
+                <h4 className="font-semibold mb-4">Sitemap</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li><a href="#home" className="hover:text-white">Home</a></li>
+                  <li><a href="#enquire" className="hover:text-white">Enquire</a></li>
+                  <li><a href="#estimate" className="hover:text-white">Estimate</a></li>
+                  <li><a href="#testimonials" className="hover:text-white">Testimonials</a></li>
+                  <li><a href="#contact" className="hover:text-white">Contact Us</a></li>
+                </ul>
+              </div>
+
+              <div>
                <h4 className="font-semibold mb-4">Coverage Areas</h4>
                <ul className="space-y-2 text-gray-400">
                  <li>Hyderabad</li>
@@ -640,16 +764,16 @@ export default function HomePage() {
                  <li>All South India</li>
                </ul>
              </div>
-             
+              
               <div>
-               <h4 className="font-semibold mb-4">Contact Info</h4>
-               <ul className="space-y-2 text-gray-400">
-                 <li>📞 +91 63008 56868</li>
-                  <li>📧 info@greencars.com</li>
-                 <li>📍 Hyderabad, Telangana</li>
-                 <li>🕒 24/7 Service</li>
-               </ul>
-             </div>
+                <h4 className="font-semibold mb-4">Contact Info</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li>📞 <a href="tel:+916300856868" className="hover:text-white">+91 63008 56868</a></li>
+                  <li>📧 <a href="mailto:info@greencars.com" className="hover:text-white">info@greencars.com</a></li>
+                  <li>📍 Hyderabad, Telangana</li>
+                  <li>🕒 24/7 Service</li>
+                </ul>
+              </div>
            </div>
            
            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
