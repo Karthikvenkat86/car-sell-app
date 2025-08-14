@@ -285,20 +285,27 @@ export default function HomePage() {
                {currentBanner === idx && (
                  <>
                    <div
-                     className="absolute bottom-28 right-28 z-20 max-w-xs px-5 py-3 mb-2 rounded-2xl shadow-xl border border-emerald-200 bg-gradient-to-br from-white/95 via-emerald-50 to-white/80 backdrop-blur-md"
-                     style={{ pointerEvents: 'auto', fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}
+                     className="absolute bottom-28 right-28 z-20 max-w-xs px-5 py-3 mb-2 rounded-2xl flex items-start gap-3"
+                     style={{ pointerEvents: 'auto', fontFamily: 'Poppins, Inter, Segoe UI, Arial, sans-serif', background: 'none', boxShadow: 'none' }}
                    >
-                     <div className="text-emerald-700 font-extrabold text-base sm:text-lg leading-tight mb-1 drop-shadow-sm" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', letterSpacing: '-0.01em' }}>
-                       We Pay First.<br className="sm:hidden" /> Handover Keys After Transfer.
+                     <div className="flex-shrink-0 mt-1">
+                       <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-700 shadow-lg">
+                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 13l2.5-2.5a2 2 0 0 1 2.8 0L12 14l3.7-3.7a2 2 0 0 1 2.8 0L21 13"/><path d="M12 20V4"/></svg>
+                       </span>
                      </div>
-                     <div className="text-gray-800 font-semibold text-xs sm:text-sm leading-snug mb-1" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
-                       Sell your other-state car in Hyderabad in just <span className="text-emerald-700 font-bold">10 mins</span>.
-                     </div>
-                     <div className="text-gray-600 text-xs sm:text-sm mb-1" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
-                       Instant payment — <span className="font-semibold text-emerald-600">hassle‑free</span> process.
-                     </div>
-                     <div className="text-emerald-800 font-bold text-xs sm:text-sm flex items-center gap-1 mt-1" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
-                       <span>⚡</span> 10 min Quick Deal
+                     <div className="drop-shadow-lg">
+                       <div className="font-extrabold text-base sm:text-lg leading-tight mb-1" style={{ fontFamily: 'Poppins, Inter, Segoe UI, Arial, sans-serif', letterSpacing: '-0.01em', color: '#10b981', textShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>
+                         We Pay First.<br className="sm:hidden" /> Handover Keys After Transfer.
+                       </div>
+                       <div className="font-semibold text-xs sm:text-sm leading-snug mb-1" style={{ fontFamily: 'Poppins, Inter, Segoe UI, Arial, sans-serif', color: '#06b6d4', textShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>
+                         Sell your other-state car in Hyderabad in just <span style={{ color: '#10b981', fontWeight: 700 }}>10 mins</span>.
+                       </div>
+                       <div className="text-xs sm:text-sm mb-1" style={{ fontFamily: 'Poppins, Inter, Segoe UI, Arial, sans-serif', color: '#fff', textShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>
+                         Instant payment — <span style={{ color: '#34d399', fontWeight: 600 }}>hassle‑free</span> process.
+                       </div>
+                       <div className="font-bold text-xs sm:text-sm flex items-center gap-1 mt-1" style={{ fontFamily: 'Poppins, Inter, Segoe UI, Arial, sans-serif', color: '#fbbf24', textShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>
+                         <span>⚡</span> 10 min Quick Deal
+                       </div>
                      </div>
                    </div>
                    <a
