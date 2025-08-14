@@ -13,6 +13,7 @@ export interface CarEstimate {
   user_id?: string
   
   // Car Information
+  vehicle_type: 'car' | 'bike'
   car_make: string
   car_model: string
   car_year: number
@@ -57,6 +58,7 @@ export interface CarMake {
   is_active: boolean
   created_at: string
   updated_at: string
+  vehicle_type: 'car' | 'bike'
 }
 
 export interface CarModel {

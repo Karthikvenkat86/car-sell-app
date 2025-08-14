@@ -4,22 +4,30 @@
 -- =============================================
 -- INSERT SAMPLE CAR MAKES
 -- =============================================
-INSERT INTO car_makes (name, logo_url) VALUES
-('Toyota', 'https://example.com/logos/toyota.png'),
-('Honda', 'https://example.com/logos/honda.png'),
-('Ford', 'https://example.com/logos/ford.png'),
-('Chevrolet', 'https://example.com/logos/chevrolet.png'),
-('Nissan', 'https://example.com/logos/nissan.png'),
-('BMW', 'https://example.com/logos/bmw.png'),
-('Mercedes-Benz', 'https://example.com/logos/mercedes.png'),
-('Audi', 'https://example.com/logos/audi.png'),
-('Hyundai', 'https://example.com/logos/hyundai.png'),
-('Kia', 'https://example.com/logos/kia.png'),
-('Volkswagen', 'https://example.com/logos/volkswagen.png'),
-('Mazda', 'https://example.com/logos/mazda.png'),
-('Subaru', 'https://example.com/logos/subaru.png'),
-('Lexus', 'https://example.com/logos/lexus.png'),
-('Acura', 'https://example.com/logos/acura.png')
+INSERT INTO car_makes (name, logo_url, vehicle_type) VALUES
+('Toyota', 'https://example.com/logos/toyota.png', 'car'),
+('Honda', 'https://example.com/logos/honda.png', 'car'),
+('Ford', 'https://example.com/logos/ford.png', 'car'),
+('Chevrolet', 'https://example.com/logos/chevrolet.png', 'car'),
+('Nissan', 'https://example.com/logos/nissan.png', 'car'),
+('BMW', 'https://example.com/logos/bmw.png', 'car'),
+('Mercedes-Benz', 'https://example.com/logos/mercedes.png', 'car'),
+('Audi', 'https://example.com/logos/audi.png', 'car'),
+('Hyundai', 'https://example.com/logos/hyundai.png', 'car'),
+('Kia', 'https://example.com/logos/kia.png', 'car'),
+('Volkswagen', 'https://example.com/logos/volkswagen.png', 'car'),
+('Mazda', 'https://example.com/logos/mazda.png', 'car'),
+('Subaru', 'https://example.com/logos/subaru.png', 'car'),
+('Lexus', 'https://example.com/logos/lexus.png', 'car'),
+('Acura', 'https://example.com/logos/acura.png', 'car'),
+-- Bike makes
+('Hero', 'https://example.com/logos/hero.png', 'bike'),
+('Bajaj', 'https://example.com/logos/bajaj.png', 'bike'),
+('TVS', 'https://example.com/logos/tvs.png', 'bike'),
+('Royal Enfield', 'https://example.com/logos/royalenfield.png', 'bike'),
+('Yamaha', 'https://example.com/logos/yamaha.png', 'bike'),
+('Suzuki', 'https://example.com/logos/suzuki.png', 'bike'),
+('KTM', 'https://example.com/logos/ktm.png', 'bike')
 ON CONFLICT (name) DO NOTHING;
 
 -- =============================================
@@ -133,6 +141,37 @@ SELECT id, 'X5', 1999, 2024, 'SUV' FROM car_makes WHERE name = 'BMW'
 ON CONFLICT (make_id, name) DO NOTHING;
 
 -- =============================================
+-- INSERT SAMPLE BIKE MODELS
+-- =============================================
+INSERT INTO car_models (make_id, name, year_start, year_end, body_type)
+SELECT id, 'Splendor', 1994, 2024, 'motorcycle' FROM car_makes WHERE name = 'Hero'
+ON CONFLICT (make_id, name) DO NOTHING;
+
+INSERT INTO car_models (make_id, name, year_start, year_end, body_type)
+SELECT id, 'Pulsar 150', 2001, 2024, 'motorcycle' FROM car_makes WHERE name = 'Bajaj'
+ON CONFLICT (make_id, name) DO NOTHING;
+
+INSERT INTO car_models (make_id, name, year_start, year_end, body_type)
+SELECT id, 'Apache RTR 160', 2007, 2024, 'motorcycle' FROM car_makes WHERE name = 'TVS'
+ON CONFLICT (make_id, name) DO NOTHING;
+
+INSERT INTO car_models (make_id, name, year_start, year_end, body_type)
+SELECT id, 'Classic 350', 2009, 2024, 'motorcycle' FROM car_makes WHERE name = 'Royal Enfield'
+ON CONFLICT (make_id, name) DO NOTHING;
+
+INSERT INTO car_models (make_id, name, year_start, year_end, body_type)
+SELECT id, 'FZ-S', 2008, 2024, 'motorcycle' FROM car_makes WHERE name = 'Yamaha'
+ON CONFLICT (make_id, name) DO NOTHING;
+
+INSERT INTO car_models (make_id, name, year_start, year_end, body_type)
+SELECT id, 'Gixxer', 2014, 2024, 'motorcycle' FROM car_makes WHERE name = 'Suzuki'
+ON CONFLICT (make_id, name) DO NOTHING;
+
+INSERT INTO car_models (make_id, name, year_start, year_end, body_type)
+SELECT id, 'Duke 200', 2012, 2024, 'motorcycle' FROM car_makes WHERE name = 'KTM'
+ON CONFLICT (make_id, name) DO NOTHING;
+
+-- =============================================
 -- INSERT CAR CONDITIONS
 -- =============================================
 INSERT INTO car_conditions (name, description, price_multiplier) VALUES
@@ -162,6 +201,7 @@ ON CONFLICT (email) DO NOTHING;
 -- INSERT SAMPLE CAR ESTIMATES (for testing)
 -- =============================================
 INSERT INTO car_estimates (
+    vehicle_type,
     car_make, 
     car_model, 
     car_year, 
@@ -176,8 +216,9 @@ INSERT INTO car_estimates (
     callback_time,
     status
 ) VALUES
-('Toyota', 'Camry', 2020, 45000, 'excellent', 25000.00, 'John Doe', '+1234567890', 'john@example.com', true, '+1234567890', 'morning', 'pending'),
-('Honda', 'Accord', 2018, 65000, 'good', 18000.00, 'Jane Smith', '+1234567891', 'jane@example.com', false, NULL, NULL, 'pending'),
-('Ford', 'F-150', 2019, 35000, 'excellent', 35000.00, 'Mike Johnson', '+1234567892', 'mike@example.com', true, '+1234567892', 'afternoon', 'inspected'),
-('BMW', '3 Series', 2021, 25000, 'excellent', 40000.00, 'Sarah Wilson', '+1234567893', 'sarah@example.com', false, NULL, NULL, 'approved'),
-('Chevrolet', 'Malibu', 2017, 80000, 'fair', 12000.00, 'David Brown', '+1234567894', 'david@example.com', true, '+1234567894', 'evening', 'completed');
+('car','Toyota', 'Camry', 2020, 45000, 'excellent', 25000.00, 'John Doe', '+1234567890', 'john@example.com', true, '+1234567890', 'morning', 'pending'),
+('car','Honda', 'Accord', 2018, 65000, 'good', 18000.00, 'Jane Smith', '+1234567891', 'jane@example.com', false, NULL, NULL, 'pending'),
+('car','Ford', 'F-150', 2019, 35000, 'excellent', 35000.00, 'Mike Johnson', '+1234567892', 'mike@example.com', true, '+1234567892', 'afternoon', 'inspected'),
+('car','BMW', '3 Series', 2021, 25000, 'excellent', 40000.00, 'Sarah Wilson', '+1234567893', 'sarah@example.com', false, NULL, NULL, 'approved'),
+('car','Chevrolet', 'Malibu', 2017, 80000, 'fair', 12000.00, 'David Brown', '+1234567894', 'david@example.com', true, '+1234567894', 'evening', 'completed'),
+('bike','Hero', 'Splendor', 2019, 22000, 'good', 550.00, 'Ravi Kumar', '+1234567800', 'ravi@example.com', true, '+1234567800', 'morning', 'pending');

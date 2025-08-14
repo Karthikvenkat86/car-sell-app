@@ -14,12 +14,13 @@ import type {
 // CAR MAKES & MODELS
 // =============================================
 
-export async function getCarMakes(): Promise<CarMake[]> {
-  console.log('getCarMakes called')
+export async function getCarMakes(vehicleType: 'car' | 'bike' = 'car'): Promise<CarMake[]> {
+  console.log('getCarMakes called for type:', vehicleType)
   const { data, error } = await supabase
     .from('car_makes')
     .select('*')
     .eq('is_active', true)
+    .eq('vehicle_type', vehicleType)
     .order('name')
 
   if (error) {
@@ -43,8 +44,8 @@ export async function getCarModels(makeId: string): Promise<CarModel[]> {
   return data || []
 }
 
-export async function getCarModelsByMakeName(makeName: string): Promise<CarModel[]> {
-  console.log('getCarModelsByMakeName called with:', makeName)
+export async function getCarModelsByMakeName(makeName: string, vehicleType: 'car' | 'bike' = 'car'): Promise<CarModel[]> {
+  console.log('getCarModelsByMakeName called with:', makeName, 'type:', vehicleType)
   
   // First, get the make ID
   const { data: makeData, error: makeError } = await supabase
@@ -52,6 +53,7 @@ export async function getCarModelsByMakeName(makeName: string): Promise<CarModel
     .select('id')
     .eq('name', makeName)
     .eq('is_active', true)
+    .eq('vehicle_type', vehicleType)
     .single()
 
   if (makeError) {

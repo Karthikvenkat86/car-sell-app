@@ -33,6 +33,25 @@ BEGIN
         ALTER TABLE car_estimates ADD COLUMN updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW();
     END IF;
     
+    -- Add vehicle_type column if it doesn't exist
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'car_estimates' AND column_name = 'vehicle_type') THEN
+        ALTER TABLE car_estimates ADD COLUMN vehicle_type VARCHAR(10) NOT NULL DEFAULT 'car' CHECK (vehicle_type IN ('car','bike'));
+    END IF;
+    
+END $$;
+
+-- Add vehicle_type to car_makes if it doesn't exist
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_name = 'car_makes' AND column_name = 'vehicle_type'
+    ) THEN
+        ALTER TABLE car_makes ADD COLUMN vehicle_type VARCHAR(10) DEFAULT 'car';
+        UPDATE car_makes SET vehicle_type = 'car' WHERE vehicle_type IS NULL;
+        ALTER TABLE car_makes ALTER COLUMN vehicle_type SET NOT NULL;
+        ALTER TABLE car_makes ADD CONSTRAINT car_makes_vehicle_type_chk CHECK (vehicle_type IN ('car','bike'));
+    END IF;
 END $$;
 
 -- =============================================
@@ -44,6 +63,7 @@ CREATE TABLE IF NOT EXISTS car_makes (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(100) UNIQUE NOT NULL,
     logo_url VARCHAR(500),
+    vehicle_type VARCHAR(10) NOT NULL DEFAULT 'car' CHECK (vehicle_type IN ('car','bike')),
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()

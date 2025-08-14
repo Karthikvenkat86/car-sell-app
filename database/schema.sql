@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS car_makes (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(100) UNIQUE NOT NULL,
     logo_url VARCHAR(500),
+    vehicle_type VARCHAR(10) NOT NULL DEFAULT 'car' CHECK (vehicle_type IN ('car','bike')),
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS car_estimates (
     user_id UUID REFERENCES users(id) ON DELETE SET NULL,
     
     -- Car Information
+    vehicle_type VARCHAR(10) NOT NULL DEFAULT 'car' CHECK (vehicle_type IN ('car','bike')),
     car_make VARCHAR(100) NOT NULL,
     car_model VARCHAR(100) NOT NULL,
     car_year INTEGER NOT NULL,

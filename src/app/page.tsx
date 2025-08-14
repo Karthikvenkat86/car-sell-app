@@ -3,13 +3,16 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-import { Car, Camera, Phone, DollarSign, CheckCircle, MapPin, ShieldCheck, Key } from 'lucide-react'
+import { Car, Bike, Camera, Phone, DollarSign, CheckCircle, MapPin, ShieldCheck, Key, ChevronLeft, ChevronRight } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { supabase } from '@/lib/supabase'
 import { createCarEstimate, getCarMakes, getCarModelsByMakeName } from '@/lib/database'
 import type { CarMake, CarModel } from '@/lib/supabase'
 
+type VehicleType = 'car' | 'bike'
+
 interface CarFormData {
+  vehicle_type: VehicleType
   car_make: string
   car_model: string
   car_year: number
@@ -31,6 +34,16 @@ export default function HomePage() {
   const [carModels, setCarModels] = useState<CarModel[]>([])
   const [isLoadingModels, setIsLoadingModels] = useState(false)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [vehicleType, setVehicleType] = useState<VehicleType>('car')
+  const [currentBanner, setCurrentBanner] = useState(0)
+
+  const bannerImages = [
+    '/banners/banner1.jpg',
+    '/banners/banner2.jpg',
+    '/banners/banner3.jpg',
+    '/banners/banner4.jpg',
+    '/banners/banner5.jpg'
+  ]
 
   const testimonials = [
     {
@@ -67,24 +80,32 @@ export default function HomePage() {
     return () => clearInterval(intervalId)
   }, [testimonials.length])
 
-  const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<CarFormData>()
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCurrentBanner((i) => (i + 1) % bannerImages.length)
+    }, 5000)
+    return () => clearInterval(id)
+  }, [bannerImages.length])
+
+  const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<CarFormData>({
+    defaultValues: { vehicle_type: 'car' }
+  })
   const callbackRequested = watch('callback_requested')
   const selectedCarMake = watch('car_make')
+  const selectedVehicleType = watch('vehicle_type')
 
   // Load car makes on component mount
   useEffect(() => {
     const loadCarMakes = async () => {
       try {
-        const makes = await getCarMakes()
-        console.log('Loaded car makes:', makes)
+        const makes = await getCarMakes(selectedVehicleType)
         setCarMakes(makes)
       } catch (error) {
-        console.error('Failed to load car makes:', error)
-        toast.error('Failed to load car makes')
+        toast.error('Failed to load makes')
       }
     }
     loadCarMakes()
-  }, [])
+  }, [selectedVehicleType])
 
   // Load car models when make changes
   useEffect(() => {
@@ -92,8 +113,7 @@ export default function HomePage() {
       if (selectedCarMake) {
         try {
           setIsLoadingModels(true)
-          console.log('Loading models for make:', selectedCarMake)
-          const models = await getCarModelsByMakeName(selectedCarMake)
+          const models = await getCarModelsByMakeName(selectedCarMake, selectedVehicleType)
           console.log('Loaded car models:', models)
           setCarModels(models)
           setValue('car_model', '') // Reset model when make changes
@@ -109,7 +129,7 @@ export default function HomePage() {
       }
     }
     loadCarModels()
-  }, [selectedCarMake, setValue])
+  }, [selectedCarMake, setValue, selectedVehicleType])
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
@@ -159,7 +179,8 @@ export default function HomePage() {
       }
 
                     // Create car estimate record using the database service
-       await createCarEstimate({
+        await createCarEstimate({
+         vehicle_type: selectedVehicleType,
          car_make: data.car_make,
          car_model: data.car_model,
          car_year: data.car_year,
@@ -176,7 +197,7 @@ export default function HomePage() {
          status: 'pending'
        })
 
-      toast.success('Car estimate request submitted successfully!')
+      toast.success('Estimate request submitted successfully!')
       reset()
       setUploadedPhotos([])
       setPhotoUrls([])
@@ -246,7 +267,78 @@ export default function HomePage() {
 
 
        {/* Hero Section */}
-       <section id="home" className="py-12 px-4 sm:px-6 lg:px-8">
+       <section id="home" className="px-0 sm:px-0 lg:px-0">
+         {/* Large Banner Carousel */}
+         <div className="relative w-full h-[42vw] max-h-[520px] min-h-[260px] overflow-hidden bg-gray-100">
+           {bannerImages.map((src, idx) => (
+             <div
+               key={src}
+               className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${currentBanner === idx ? 'opacity-100' : 'opacity-0'}`}
+             >
+               <Image
+                 src={src}
+                 alt="Hero banner"
+                 fill
+                 priority
+                 className="object-cover"
+               />
+               {currentBanner === idx && (
+                 <>
+                   <div
+                     className="absolute bottom-28 right-28 z-20 max-w-xs px-5 py-3 mb-2 rounded-2xl shadow-xl border border-emerald-200 bg-gradient-to-br from-white/95 via-emerald-50 to-white/80 backdrop-blur-md"
+                     style={{ pointerEvents: 'auto', fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}
+                   >
+                     <div className="text-emerald-700 font-extrabold text-base sm:text-lg leading-tight mb-1 drop-shadow-sm" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', letterSpacing: '-0.01em' }}>
+                       We Pay First.<br className="sm:hidden" /> Handover Keys After Transfer.
+                     </div>
+                     <div className="text-gray-800 font-semibold text-xs sm:text-sm leading-snug mb-1" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
+                       Sell your other-state car in Hyderabad in just <span className="text-emerald-700 font-bold">10 mins</span>.
+                     </div>
+                     <div className="text-gray-600 text-xs sm:text-sm mb-1" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
+                       Instant payment — <span className="font-semibold text-emerald-600">hassle‑free</span> process.
+                     </div>
+                     <div className="text-emerald-800 font-bold text-xs sm:text-sm flex items-center gap-1 mt-1" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}>
+                       <span>⚡</span> 10 min Quick Deal
+                     </div>
+                   </div>
+                   <a
+                     href="#enquire"
+                     className="absolute bottom-6 right-6 z-20 px-4 py-1.5 bg-emerald-600 text-white text-sm font-semibold rounded-full shadow-lg hover:bg-emerald-700 transition-all border border-white/70 backdrop-blur-sm opacity-95"
+                     style={{ minWidth: 'auto', textAlign: 'center', letterSpacing: '0.02em', padding: '0.5rem 1.25rem', fontFamily: 'Inter, Segoe UI, Arial, sans-serif' }}
+                   >
+                     Get Best Price
+                   </a>
+                 </>
+               )}
+             </div>
+           ))}
+           {/* Prev/Next */}
+           <button
+             aria-label="Previous banner"
+             onClick={() => setCurrentBanner((i) => (i - 1 + bannerImages.length) % bannerImages.length)}
+             className="absolute left-3 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-10 w-10 rounded-full bg-black/40 text-white hover:bg-black/60"
+           >
+             <ChevronLeft className="h-5 w-5" />
+           </button>
+           <button
+             aria-label="Next banner"
+             onClick={() => setCurrentBanner((i) => (i + 1) % bannerImages.length)}
+             className="absolute right-3 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-10 w-10 rounded-full bg-black/40 text-white hover:bg-black/60"
+           >
+             <ChevronRight className="h-5 w-5" />
+           </button>
+           {/* Dots */}
+           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+             {bannerImages.map((_, idx) => (
+               <button
+                 key={idx}
+                 aria-label={`Go to slide ${idx + 1}`}
+                 onClick={() => setCurrentBanner(idx)}
+                 className={`h-2.5 rounded-full transition-all duration-300 ${currentBanner === idx ? 'w-6 bg-white' : 'w-2.5 bg-white/60'}`}
+               />
+             ))}
+           </div>
+         </div>
          <div className="max-w-6xl mx-auto text-center">
             <div className="mb-8">
               
@@ -328,9 +420,8 @@ export default function HomePage() {
                   <span className="inline-block bg-primary-100 text-primary-800 text-xs px-3 py-1 rounded-full">Active</span>
                  </div>
                </div>
-             </div>
-             
-                 <div className="mt-8 p-4 bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl">
+             </div>             
+              <div className="mt-8 p-4 bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl">
                 <p className="text-gray-700 font-medium">
                   💡 <strong>Why Choose Us?</strong> We provide doorstep inspection and instant payment across all major cities in South India!
                 </p>
@@ -459,23 +550,35 @@ export default function HomePage() {
         {/* Form Section */}
        <section id="estimate" className="py-8 px-4 sm:px-6 lg:px-8">
          <div className="max-w-2xl mx-auto">
-           <div className="card">
-             <h3 className="text-2xl font-bold text-gray-900 mb-6">Car Details</h3>
+            <div className="card">
+             <div className="flex items-center justify-between mb-6">
+               <h3 className="text-2xl font-bold text-gray-900">Vehicle Details</h3>
+               <div className="inline-flex rounded-lg border border-gray-200 overflow-hidden">
+                 <button type="button" className={`px-3 py-1 text-sm font-medium ${vehicleType === 'car' ? 'bg-primary-600 text-white' : 'bg-white text-gray-700'}`} onClick={() => { setVehicleType('car'); setValue('vehicle_type','car'); }}>
+                   <span className="inline-flex items-center gap-1"><Car className="h-4 w-4"/> Car</span>
+                 </button>
+                 <button type="button" className={`px-3 py-1 text-sm font-medium ${vehicleType === 'bike' ? 'bg-primary-600 text-white' : 'bg-white text-gray-700'}`} onClick={() => { setVehicleType('bike'); setValue('vehicle_type','bike'); }}>
+                   <span className="inline-flex items-center gap-1"><Bike className="h-4 w-4"/> Bike</span>
+                 </button>
+               </div>
+             </div>
             
             
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                              {/* Car Information */}
                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                 <div>
+                  <input type="hidden" {...register('vehicle_type', { required: true })} />
+
+                  <div>
                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                     Car Make
+                      {vehicleType === 'car' ? 'Car Make' : 'Bike Make'}
                    </label>
                    <select
                      {...register('car_make', { required: 'Car make is required' })}
                      className="input-field"
                    >
-                     <option value="">Select car make</option>
+                      <option value="">{vehicleType === 'car' ? 'Select car make' : 'Select bike make'}</option>
                      {carMakes.map((make) => (
                        <option key={make.id} value={make.name}>
                          {make.name}
@@ -491,18 +594,16 @@ export default function HomePage() {
                    </p>
                  </div>
 
-                 <div>
+                  <div>
                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                     Car Model
+                      {vehicleType === 'car' ? 'Car Model' : 'Bike Model'}
                    </label>
                    <select
                      {...register('car_model', { required: 'Car model is required' })}
                      className="input-field"
                      disabled={!selectedCarMake || isLoadingModels}
                    >
-                     <option value="">
-                       {isLoadingModels ? 'Loading models...' : 'Select car model'}
-                     </option>
+                      <option value="">{isLoadingModels ? 'Loading models...' : (vehicleType === 'car' ? 'Select car model' : 'Select bike model')}</option>
                      {carModels.map((model) => (
                        <option key={model.id} value={model.name}>
                          {model.name} ({model.year_start}-{model.year_end || 'Present'})
@@ -802,7 +903,7 @@ export default function HomePage() {
                 <h4 className="font-semibold mb-4">Contact Info</h4>
                 <ul className="space-y-2 text-gray-400">
                   <li>📞 <a href="tel:+916300856868" className="hover:text-white">+91 80193 98866</a></li>
-                  <li>📧 <a href="mailto:info@greencars.com" className="hover:text-white">info@greencars.com</a></li>
+                  <li>📧 <a href="mailto:sell@greencarz.com" className="hover:text-white">sell@greencarz.com</a></li>
                   <li>📍 Hyderabad, Telangana</li>
                   <li>🕒 24/7 Service</li>
                 </ul>
