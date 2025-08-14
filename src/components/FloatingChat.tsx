@@ -45,7 +45,7 @@ export default function FloatingChat() {
               className="w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white transition-colors"
             >
               <Phone className="h-5 w-5" />
-              Call +91 63008 56868
+              Call +91 80193 98866
             </a>
 
             <a

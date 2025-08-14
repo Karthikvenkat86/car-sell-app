@@ -147,13 +147,18 @@ export default function AdminPage() {
               <Image className="logo-img--tight" src="/green-carz-logo.svg" alt="green Carz" width={260} height={94} />
               <h1 className="sr-only">green Carz Admin</h1>
             </div>
-            <button
-              onClick={handleLogout}
-              className="flex items-center text-gray-600 hover:text-gray-900"
-            >
-              <LogOut className="h-5 w-5 mr-2" />
-              Logout
-            </button>
+            <div className="flex items-center gap-4">
+              <a href="/admin" className="text-sm font-medium text-gray-600 hover:text-gray-900">Estimates</a>
+              <a href="/admin/callbacks" className="text-sm font-medium text-gray-600 hover:text-gray-900">Callbacks</a>
+              <a href="/admin/metrics" className="text-sm font-medium text-gray-600 hover:text-gray-900">Metrics</a>
+              <button
+                onClick={handleLogout}
+                className="flex items-center text-gray-600 hover:text-gray-900"
+              >
+                <LogOut className="h-5 w-5 mr-2" />
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </header>

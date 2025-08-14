@@ -208,10 +208,10 @@ export default function HomePage() {
                  <a
                    href="tel:+916300856868"
                    className="inline-flex items-center text-sm sm:text-base text-gray-800 hover:text-emerald-700 font-medium whitespace-nowrap"
-                   aria-label="Call +91 63008 56868"
+                   aria-label="Call +91 80193 98866"
                  >
                    <Phone className="h-5 w-5 sm:h-4 sm:w-4 mr-1 text-emerald-600" />
-                   <span className="whitespace-nowrap">+91 63008 56868</span>
+                   <span className="whitespace-nowrap">+91 80193 98866</span>
                  </a>
                  <a
                    href="https://wa.me/916300856868"
@@ -248,28 +248,55 @@ export default function HomePage() {
        {/* Hero Section */}
        <section id="home" className="py-12 px-4 sm:px-6 lg:px-8">
          <div className="max-w-6xl mx-auto text-center">
-                       <div className="mb-8">
-              <h2 className="text-5xl font-bold text-gray-900 mb-6">
-                Sell Your Car Fast & Get Instant Cash
-              </h2>
+            <div className="mb-8">
               
-              {/* Handover Keys Tagline - Moved to top */}
-              <div className="inline-flex items-center bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-4 rounded-full shadow-lg mb-3">
-                <span className="text-2xl font-bold">🔑 We Pay First. Take Keys After Name Transfer. 100% Hassle-Free 🔑</span>
+              {/* Trendy Glass Tagline Card */}
+              <div className="relative mx-auto max-w-4xl mb-2">
+                <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-primary-500/25 via-emerald-500/25 to-primary-700/25 blur-xl" />
+                <div className="backdrop-blur-md bg-white/70 border border-white/60 shadow-2xl rounded-2xl p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className="text-left">
+                      <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-50 rounded-full px-3 py-1 w-max">
+                        Now in Hyderabad
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      </div>
+                      <h3 className="mt-3 text-2xl sm:text-3xl font-extrabold leading-tight">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-700 via-emerald-600 to-primary-800">We Pay First.</span> Handover Keys After Transfer.
+                      </h3>
+                      <p className="mt-2 text-sm sm:text-base text-gray-700">
+                        Sell your other-state car in Hyderabad in just 10 mins.
+                      </p>
+                      <p className="mt-2 text-sm sm:text-base text-gray-700">
+                        Instant payment — hassle‑free process.
+                      </p>
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-900/5 border border-gray-200 text-xs font-semibold text-gray-700">Karnataka</span>
+                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-900/5 border border-gray-200 text-xs font-semibold text-gray-700">Tamil Nadu</span>
+                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-900/5 border border-gray-200 text-xs font-semibold text-gray-700">Maharashtra</span>
+                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-900/5 border border-gray-200 text-xs font-semibold text-gray-700">Delhi</span>
+                      </div>
+                    </div>
+                    <div className="flex-shrink-0">
+                      <div className="rounded-xl bg-gradient-to-br from-primary-600 to-emerald-600 text-white px-4 py-3 font-semibold shadow-lg">
+                        10 min Quick Deal ⚡
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               
-              <p className="text-xl text-gray-700 mb-6">
+              {/* <p className="text-xl text-gray-700 mb-6">
                 Hello Hyderabad! Struggling to sell your <span className="font-semibold text-primary-700">other-state car</span> for a good price?
                 We especially handle <span className="font-semibold">Karnataka (Bengaluru)</span> and <span className="font-semibold">Tamil Nadu</span> registrations with a smooth, compliant process.
                 Enquire once — we transfer the name first, then you hand over the keys.
-              </p>
+              </p> */}
 
             </div>
            
            {/* State Coverage Section */}
-           <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
-             <h3 className="text-2xl font-bold text-gray-900 mb-2">Pan-India Car Buying Service</h3>
+            <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
+             <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Hyderabad’s Best Price for Other‑State Cars</h3>
              <div className="inline-block mb-6 text-sm font-semibold text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-3 py-1">Other-State Cars Welcome (KA, TN, MH, KL)</div>
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                <div className="text-center group">
@@ -277,7 +304,6 @@ export default function HomePage() {
                    <span className="text-2xl">🏛️</span>
                  </div>
                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Karnataka</h4>
-                 <p className="text-gray-600 text-sm">Bangalore, Mysore, Mangalore & more</p>
                  <div className="mt-3">
                   <span className="inline-block bg-primary-100 text-primary-800 text-xs px-3 py-1 rounded-full">Active</span>
                  </div>
@@ -288,7 +314,6 @@ export default function HomePage() {
                    <span className="text-2xl">🏛️</span>
                  </div>
                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Tamil Nadu</h4>
-                 <p className="text-gray-600 text-sm">Chennai, Coimbatore, Madurai & more</p>
                  <div className="mt-3">
                   <span className="inline-block bg-primary-100 text-primary-800 text-xs px-3 py-1 rounded-full">Active</span>
                  </div>
@@ -299,7 +324,6 @@ export default function HomePage() {
                    <span className="text-2xl">🏛️</span>
                  </div>
                  <h4 className="text-lg font-semibold text-gray-900 mb-2">All States</h4>
-                 <p className="text-gray-600 text-sm">Maharashtra, Kerala, AP & Telangana</p>
                  <div className="mt-3">
                   <span className="inline-block bg-primary-100 text-primary-800 text-xs px-3 py-1 rounded-full">Active</span>
                  </div>
@@ -777,7 +801,7 @@ export default function HomePage() {
               <div>
                 <h4 className="font-semibold mb-4">Contact Info</h4>
                 <ul className="space-y-2 text-gray-400">
-                  <li>📞 <a href="tel:+916300856868" className="hover:text-white">+91 63008 56868</a></li>
+                  <li>📞 <a href="tel:+916300856868" className="hover:text-white">+91 80193 98866</a></li>
                   <li>📧 <a href="mailto:info@greencars.com" className="hover:text-white">info@greencars.com</a></li>
                   <li>📍 Hyderabad, Telangana</li>
                   <li>🕒 24/7 Service</li>

@@ -143,6 +143,23 @@ export async function getCarEstimates(status?: CarEstimate['status']): Promise<C
   return data || []
 }
 
+export async function getCallbackRequests(status?: CarEstimate['status']): Promise<CarEstimate[]> {
+  let query = supabase
+    .from('car_estimates')
+    .select('*')
+    .eq('callback_requested', true)
+    .order('created_at', { ascending: false })
+
+  if (status) {
+    query = query.eq('status', status)
+  }
+
+  const { data, error } = await query
+
+  if (error) throw error
+  return data || []
+}
+
 export async function getCarEstimateById(id: string): Promise<CarEstimate | null> {
   const { data, error } = await supabase
     .from('car_estimates')
